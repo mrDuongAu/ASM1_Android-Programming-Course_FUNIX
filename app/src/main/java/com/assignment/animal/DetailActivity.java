@@ -1,7 +1,6 @@
 package com.assignment.animal;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,12 +31,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         ivFavorite = findViewById(R.id.ivFavorite);
 
         back = findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        back.setOnClickListener(view -> DetailActivity.this.finish());
 
         changeViewAccordingToAnimalChosen();
     }
@@ -60,11 +54,6 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
                 listenToFavoriteClicked(intent, animal);
 
-
-                if (ivFavorite.getDrawable() == ResourcesCompat.
-                        getDrawable(getResources(), R.drawable.ic_favorite, getTheme())) {
-                    intent.putExtra("FAVORITE_ICON", "elephant_checked");
-                }
                 break;
             case "dragonfly":
                 ivImage.setImageResource(R.drawable.bg_dragonfly);
@@ -73,10 +62,6 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
                 listenToFavoriteClicked(intent, animal);
 
-                if (ivFavorite.getDrawable() == ResourcesCompat.
-                        getDrawable(getResources(), R.drawable.ic_favorite, getTheme())) {
-                    intent.putExtra("FAVORITE_ICON", "dragonfly_checked");
-                }
                 break;
             case "dolphin":
                 ivImage.setImageResource(R.drawable.bg_dolphin);
@@ -85,10 +70,6 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
                 listenToFavoriteClicked(intent, animal);
 
-                if (ivFavorite.getDrawable() == ResourcesCompat.
-                        getDrawable(getResources(), R.drawable.ic_favorite, getTheme())) {
-                    intent.putExtra("FAVORITE_ICON", "dolphin_checked");
-                }
                 break;
             case "dog":
                 ivImage.setImageResource(R.drawable.bg_dog);
@@ -97,10 +78,6 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
                 listenToFavoriteClicked(intent, animal);
 
-                if (ivFavorite.getDrawable() == ResourcesCompat.
-                        getDrawable(getResources(), R.drawable.ic_favorite, getTheme())) {
-                    intent.putExtra("FAVORITE_ICON", "dog_checked");
-                }
                 break;
             case "pig":
                 ivImage.setImageResource(R.drawable.bg_pig);
@@ -109,10 +86,6 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
                 listenToFavoriteClicked(intent, animal);
 
-                if (ivFavorite.getDrawable() == ResourcesCompat.
-                        getDrawable(getResources(), R.drawable.ic_favorite, getTheme())) {
-                    intent.putExtra("FAVORITE_ICON", "pig_checked");
-                }
                 break;
             case "duck":
                 ivImage.setImageResource(R.drawable.bg_duck);
@@ -121,10 +94,6 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
                 listenToFavoriteClicked(intent, animal);
 
-                if (ivFavorite.getDrawable() == ResourcesCompat.
-                        getDrawable(getResources(), R.drawable.ic_favorite, getTheme())) {
-                    intent.putExtra("FAVORITE_ICON", "duck_checked");
-                }
                 break;
             case "ladybug":
                 ivImage.setImageResource(R.drawable.bg_laydybug);
@@ -133,10 +102,6 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
                 listenToFavoriteClicked(intent, animal);
 
-                if (ivFavorite.getDrawable() == ResourcesCompat.
-                        getDrawable(getResources(), R.drawable.ic_favorite, getTheme())) {
-                    intent.putExtra("FAVORITE_ICON", "ladybug_checked");
-                }
                 break;
             case "turtle":
                 ivImage.setImageResource(R.drawable.bg_turtle);
@@ -145,10 +110,6 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
                 listenToFavoriteClicked(intent, animal);
 
-                if (ivFavorite.getDrawable() == ResourcesCompat.
-                        getDrawable(getResources(), R.drawable.ic_favorite, getTheme())) {
-                    intent.putExtra("FAVORITE_ICON", "turtle_checked");
-                }
                 break;
             case "penguin":
                 ivImage.setImageResource(R.drawable.bg_penguin);
@@ -157,10 +118,6 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
                 listenToFavoriteClicked(intent, animal);
 
-                if (ivFavorite.getDrawable() == ResourcesCompat.
-                        getDrawable(getResources(), R.drawable.ic_favorite, getTheme())) {
-                    intent.putExtra("FAVORITE_ICON", "penguin_checked");
-                }
                 break;
         }
 

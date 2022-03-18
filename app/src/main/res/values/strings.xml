@@ -41,5 +41,5 @@ Although almost all penguin species are native to the southern hemisphere, they 
     <string name="penguin_name">Penguin</string>
 
     <string name="animal_name_demo">Animal Name</string>
-    <string name="button">Button</string>
+    <string name="back">back</string>
 </resources>
