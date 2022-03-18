@@ -4,13 +4,16 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -18,44 +21,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ivPenguin;
     ImageView ivFavoriteElephant, ivFavoriteDragonFly, ivFavoriteDolphin, ivFavoriteDog,
             ivFavoritePig, ivFavoriteDuck, ivFavoriteLadybug, ivFavoriteTurtle, ivFavoritePenguin;
-    String favoriteState = "";
+    boolean favoriteState;
+    String animalType;
 
     ActivityResultLauncher<Intent> launcher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
                 if (result.getResultCode() == RESULT_OK) {
                     Intent data = result.getData();
 
-                    favoriteState = data.getStringExtra("FAVORITE_ICON");
+                    favoriteState = data.getBooleanExtra("FAV", false);
+                    animalType = data.getStringExtra("TYPE");
+                    Toast.makeText(this, String.valueOf(favoriteState), Toast.LENGTH_SHORT).show();
 
-                    switch (favoriteState) {
-                        case "elephant_checked":
-                            ivFavoriteElephant.setVisibility(View.VISIBLE);
-                            break;
-                        case "dragonfly_checked":
-                            ivFavoriteDragonFly.setVisibility(View.VISIBLE);
-                            break;
-                        case "dolphin_checked":
-                            ivFavoriteDolphin.setVisibility(View.VISIBLE);
-                            break;
-                        case "dog_checked":
-                            ivFavoriteDog.setVisibility(View.VISIBLE);
-                            break;
-                        case "pig_checked":
-                            ivFavoritePig.setVisibility(View.VISIBLE);
-                            break;
-                        case "duck_checked":
-                            ivFavoriteDuck.setVisibility(View.VISIBLE);
-                            break;
-                        case "ladybug_checked":
-                            ivFavoriteLadybug.setVisibility(View.VISIBLE);
-                            break;
-                        case "turtle_checked":
-                            ivFavoriteTurtle.setVisibility(View.VISIBLE);
-                            break;
-                        case "penguin_checked":
-                            ivPenguin.setVisibility(View.VISIBLE);
-                            break;
-                    }
+
                 }
             });
 
@@ -64,9 +43,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
+//        Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
+        getback();
+    }
+
+    private void getback() {
+
+        Intent data = getIntent();
+
+        favoriteState = data.getBooleanExtra("FAV", false);
+        animalType = data.getStringExtra("TYPE");
+        Toast.makeText(this, String.valueOf(favoriteState), Toast.LENGTH_SHORT).show();
     }
 
     private void initViews() {
+
+
         ivFavoriteElephant = findViewById(R.id.ivFavoriteElephant);
         ivFavoriteElephant.setVisibility(View.GONE);
 
@@ -128,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (view.getId() == R.id.ivElephant) {
             intent.putExtra("ANIMAL", "elephant");
+            intent.putExtra("FAVORITE_MAIN", favoriteState);
         } else if (view.getId() == R.id.ivDragonFly) {
             intent.putExtra("ANIMAL", "dragonfly");
         } else if (view.getId() == R.id.ivDolphin) {
@@ -146,6 +139,52 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             intent.putExtra("ANIMAL", "penguin");
         }
 
-        launcher.launch(intent);
+        startActivityForResult(intent, 101);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == 101) {
+            favoriteState = data.getBooleanExtra("FAV", false);
+            animalType = data.getStringExtra("TYPE");
+            Toast.makeText(this, String.valueOf(favoriteState), Toast.LENGTH_SHORT).show();
+
+            switch (animalType) {
+                case "elephant":
+                    if (favoriteState) {
+                        ivFavoriteElephant.setVisibility(View.VISIBLE);
+                    } else {
+                        ivFavoriteElephant.setVisibility(View.GONE);
+                    }
+                    break;
+                case "dragonfly":
+                    ivFavoriteDragonFly.setVisibility(View.VISIBLE);
+                    break;
+                case "dolphin_checked":
+                    ivFavoriteDolphin.setVisibility(View.VISIBLE);
+                    break;
+                case "dog_checked":
+                    ivFavoriteDog.setVisibility(View.VISIBLE);
+                    break;
+                case "pig_checked":
+                    ivFavoritePig.setVisibility(View.VISIBLE);
+                    break;
+                case "duck_checked":
+                    ivFavoriteDuck.setVisibility(View.VISIBLE);
+                    break;
+                case "ladybug_checked":
+                    ivFavoriteLadybug.setVisibility(View.VISIBLE);
+                    break;
+                case "turtle_checked":
+                    ivFavoriteTurtle.setVisibility(View.VISIBLE);
+                    break;
+                case "penguin_checked":
+                    ivPenguin.setVisibility(View.VISIBLE);
+                    break;
+            }
+
+
+        }
     }
 }
