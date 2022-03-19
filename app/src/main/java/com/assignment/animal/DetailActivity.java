@@ -15,7 +15,6 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     TextView tvAnimalName, tvDescription;
     Intent intent;
     boolean flag = false;
-    Button back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +28,6 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         tvAnimalName = findViewById(R.id.tvAnimalName);
         tvDescription = findViewById(R.id.tvDescription);
         ivFavorite = findViewById(R.id.ivFavorite);
-
-        back = findViewById(R.id.back);
-        back.setOnClickListener(view -> DetailActivity.this.finish());
 
         changeViewAccordingToAnimalChosen();
     }
